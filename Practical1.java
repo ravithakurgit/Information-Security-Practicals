@@ -66,9 +66,36 @@ public class Practical1 {
 
                     break;
                 case 3:
-                    System.out.println("Affine Cipher Selected");
-                    break;
 
+                    sc.nextLine();
+
+                    System.out.print("Enter Plain Text : ");
+                    String text3 = sc.nextLine();
+
+                    System.out.print("Enter Multiplication Key (a): ");
+                    int a = sc.nextInt();
+
+                    if (gcd(a, 26) != 1) {
+
+                        System.out.println("Invalid Multiplication Key");
+
+                        break;
+
+                    }
+
+                    System.out.print("Enter Addition Key (b): ");
+
+                    int b = sc.nextInt();
+
+                    String encrypted3 = affineEncrypt(text3, a, b);
+
+                    System.out.println("Encrypted = " + encrypted3);
+
+                    String decrypted3 = affineDecrypt(encrypted3, a, b);
+
+                    System.out.println("Decrypted = " + decrypted3);
+
+                    break;
                 case 4:
                     System.out.println("Program Ended");
                     break;
@@ -220,5 +247,75 @@ public class Practical1 {
         }
 
         return -1;
+    }
+
+    public static String affineEncrypt(String text, int a, int b) {
+
+        String result = "";
+
+        text = text.toUpperCase();
+
+        for (int i = 0; i < text.length(); i++) {
+
+            char ch = text.charAt(i);
+
+            if (ch >= 'A' && ch <= 'Z') {
+
+                char encrypt = (char) ((((ch - 'A') * a + b) % 26) + 'A');
+
+                result += encrypt;
+
+            }
+
+            else {
+
+                result += ch;
+
+            }
+
+        }
+
+        return result;
+
+    }
+
+    public static String affineDecrypt(String text, int a, int b) {
+
+        String result = "";
+
+        int inverse = multiplicativeInverse(a);
+
+        if (inverse == -1) {
+
+            return "Invalid Key";
+
+        }
+
+        text = text.toUpperCase();
+
+        for (int i = 0; i < text.length(); i++) {
+
+            char ch = text.charAt(i);
+
+            if (ch >= 'A' && ch <= 'Z') {
+
+                int value = (inverse * ((ch - 'A' - b + 26)) % 26);
+
+                char decrypt = (char) (value + 'A');
+
+                result += decrypt;
+
+            }
+
+            else {
+
+                result += ch;
+
+            }
+
+        }
+
+        return result;
+
     }
 }
