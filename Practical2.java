@@ -56,6 +56,36 @@ public class Practical2 {
                     System.out.println();
 
                 }
+                System.out.println("\nPlaintext to Number Conversion");
+
+                for (int i = 0; i < text.length(); i++) {
+
+                    char ch = text.charAt(i);
+
+                    int value = ch - 'A';
+
+                    System.out.println(ch + " = " + value);
+
+                }
+                // Padding if plaintext length is odd
+
+                if (text.length() % 2 != 0) {
+
+                    text = text + "X";
+
+                    System.out.println("\nPlaintext length is odd.");
+                    System.out.println("After Padding : " + text);
+
+                }
+
+                System.out.println("\nBlocks");
+
+                for (int i = 0; i < text.length(); i = i + 2) {
+
+                    System.out.println(
+                            text.charAt(i) + " " + text.charAt(i + 1));
+
+                }
 
                 break;
 
