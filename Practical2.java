@@ -19,7 +19,43 @@ public class Practical2 {
 
             case 1:
 
-                System.out.println("2 x 2 Hill Cipher Selected");
+                sc.nextLine();
+
+                System.out.print("Enter Plain Text : ");
+
+                String text = sc.nextLine().toUpperCase();
+
+                int key[][] = new int[2][2];
+
+                System.out.println("Enter 2 x 2 Key Matrix");
+
+                for (int i = 0; i < 2; i++) {
+
+                    for (int j = 0; j < 2; j++) {
+
+                        System.out.print("Key[" + i + "][" + j + "] : ");
+
+                        key[i][j] = sc.nextInt();
+
+                    }
+
+                }
+
+                System.out.println("\nPlain Text = " + text);
+
+                System.out.println("\nKey Matrix");
+
+                for (int i = 0; i < 2; i++) {
+
+                    for (int j = 0; j < 2; j++) {
+
+                        System.out.print(key[i][j] + " ");
+
+                    }
+
+                    System.out.println();
+
+                }
 
                 break;
 
