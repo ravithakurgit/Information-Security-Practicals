@@ -44,6 +44,21 @@ public class Practical2 {
 
                 System.out.println("\nDeterminant = " + det);
 
+                int inverse = modInverse(det);
+
+                System.out.println("Determinant = " + det);
+                System.out.println("Modular Inverse = " + inverse);
+
+                if (inverse == -1) {
+
+                    System.out.println("\nInvalid Key Matrix");
+
+                    System.out.println("Matrix cannot be used for Hill Cipher.");
+
+                    break;
+
+                }
+
                 System.out.println("\nPlain Text = " + text);
 
                 System.out.println("\nKey Matrix");
@@ -128,6 +143,24 @@ public class Practical2 {
     public static int determinant(int key[][]) {
 
         return (key[0][0] * key[1][1]) - (key[0][1] * key[1][0]);
+
+    }
+
+    public static int modInverse(int det) {
+
+        det = ((det % 26) + 26) % 26;
+
+        for (int i = 1; i < 26; i++) {
+
+            if ((det * i) % 26 == 1) {
+
+                return i;
+
+            }
+
+        }
+
+        return -1;
 
     }
 }
