@@ -58,6 +58,21 @@ public class Practical2 {
                     break;
 
                 }
+                int inverseKey[][] = inverseMatrix(key, inverse);
+
+                System.out.println("\nInverse Matrix");
+
+                for (int i = 0; i < 2; i++) {
+
+                    for (int j = 0; j < 2; j++) {
+
+                        System.out.print(inverseKey[i][j] + " ");
+
+                    }
+
+                    System.out.println();
+
+                }
 
                 System.out.println("\nPlain Text = " + text);
 
@@ -161,6 +176,22 @@ public class Practical2 {
         }
 
         return -1;
+
+    }
+
+    public static int[][] inverseMatrix(int key[][], int inverse) {
+
+        int inv[][] = new int[2][2];
+
+        inv[0][0] = (key[1][1] * inverse) % 26;
+
+        inv[0][1] = ((-key[0][1] * inverse) % 26 + 26) % 26;
+
+        inv[1][0] = ((-key[1][0] * inverse) % 26 + 26) % 26;
+
+        inv[1][1] = (key[0][0] * inverse) % 26;
+
+        return inv;
 
     }
 }
