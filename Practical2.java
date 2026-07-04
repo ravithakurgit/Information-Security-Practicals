@@ -62,33 +62,14 @@ public class Practical2 {
 
                 System.out.println("\nInverse Matrix");
 
-                for (int i = 0; i < 2; i++) {
-
-                    for (int j = 0; j < 2; j++) {
-
-                        System.out.print(inverseKey[i][j] + " ");
-
-                    }
-
-                    System.out.println();
-
-                }
+                printMatrix(inverseKey);
 
                 System.out.println("\nPlain Text = " + text);
 
                 System.out.println("\nKey Matrix");
 
-                for (int i = 0; i < 2; i++) {
+                printMatrix(key);
 
-                    for (int j = 0; j < 2; j++) {
-
-                        System.out.print(key[i][j] + " ");
-
-                    }
-
-                    System.out.println();
-
-                }
                 System.out.println("\nPlaintext to Number Conversion");
 
                 for (int i = 0; i < text.length(); i++) {
@@ -192,6 +173,22 @@ public class Practical2 {
         inv[1][1] = (key[0][0] * inverse) % 26;
 
         return inv;
+
+    }
+
+    public static void printMatrix(int matrix[][]) {
+
+        for (int i = 0; i < 2; i++) {
+
+            for (int j = 0; j < 2; j++) {
+
+                System.out.print(matrix[i][j] + " ");
+
+            }
+
+            System.out.println();
+
+        }
 
     }
 }
