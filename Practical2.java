@@ -25,21 +25,8 @@ public class Practical2 {
 
                 String text = sc.nextLine().toUpperCase();
 
-                int key[][] = new int[2][2];
+                int key[][] = readMatrix(sc);
 
-                System.out.println("Enter 2 x 2 Key Matrix");
-
-                for (int i = 0; i < 2; i++) {
-
-                    for (int j = 0; j < 2; j++) {
-
-                        System.out.print("Key[" + i + "][" + j + "] : ");
-
-                        key[i][j] = sc.nextInt();
-
-                    }
-
-                }
                 int det = determinant(key);
 
                 System.out.println("\nDeterminant = " + det);
@@ -81,16 +68,9 @@ public class Practical2 {
                     System.out.println(ch + " = " + value);
 
                 }
-                // Padding if plaintext length is odd
-
-                if (text.length() % 2 != 0) {
-
-                    text = text + "X";
-
-                    System.out.println("\nPlaintext length is odd.");
-                    System.out.println("After Padding : " + text);
-
-                }
+                text = padding(text);
+                System.out.println("\nPlaintext length is odd.");
+                System.out.println("After Padding : " + text);
 
                 System.out.println("\nBlocks");
 
@@ -189,6 +169,40 @@ public class Practical2 {
             System.out.println();
 
         }
+
+    }
+
+    public static int[][] readMatrix(Scanner sc) {
+
+        int key[][] = new int[2][2];
+
+        System.out.println("Enter 2 x 2 Key Matrix");
+
+        for (int i = 0; i < 2; i++) {
+
+            for (int j = 0; j < 2; j++) {
+
+                System.out.print("Key[" + i + "][" + j + "] : ");
+
+                key[i][j] = sc.nextInt();
+
+            }
+
+        }
+
+        return key;
+
+    }
+
+    public static String padding(String text) {
+
+        if (text.length() % 2 != 0) {
+
+            text = text + "X";
+
+        }
+
+        return text;
 
     }
 }
