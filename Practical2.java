@@ -40,6 +40,9 @@ public class Practical2 {
                     }
 
                 }
+                int det = determinant(key);
+
+                System.out.println("\nDeterminant = " + det);
 
                 System.out.println("\nPlain Text = " + text);
 
@@ -122,4 +125,9 @@ public class Practical2 {
 
     }
 
+    public static int determinant(int key[][]) {
+
+        return (key[0][0] * key[1][1]) - (key[0][1] * key[1][0]);
+
+    }
 }
