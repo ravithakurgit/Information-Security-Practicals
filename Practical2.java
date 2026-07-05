@@ -94,8 +94,9 @@ public class Practical2 {
                     int c1 = (key[0][0] * p1 + key[0][1] * p2) % 26;
                     int c2 = (key[1][0] * p1 + key[1][1] * p2) % 26;
 
-                    cipher = cipher + (char) (c1 + 'A');
-                    cipher = cipher + (char) (c2 + 'A');
+                    // cipher = cipher + (char) (c1 + 'A');
+                    cipher += numberToLetter(c1);
+                    cipher += numberToLetter(c2);
                 }
 
                 System.out.println(cipher);
@@ -211,6 +212,12 @@ public class Practical2 {
     public static int letterToNumber(char ch) {
 
         return ch - 'A';
+
+    }
+
+    public static char numberToLetter(int n) {
+
+        return (char) (n + 'A');
 
     }
 }
