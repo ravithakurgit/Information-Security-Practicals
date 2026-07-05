@@ -86,14 +86,17 @@ public class Practical2 {
 
                 for (int i = 0; i < text.length(); i += 2) {
 
-                    int p1 = letterToNumber(text.charAt(i));
-                    int p2 = letterToNumber(text.charAt(i + 1));
+                    cipher += encryptBlock(key,
+                            text.charAt(i),
+                            text.charAt(i + 1));
+                    // int p1 = letterToNumber(text.charAt(i));
+                    // int p2 = letterToNumber(text.charAt(i + 1));
 
-                    int c1 = (key[0][0] * p1 + key[0][1] * p2) % 26;
-                    int c2 = (key[1][0] * p1 + key[1][1] * p2) % 26;
+                    // int c1 = (key[0][0] * p1 + key[0][1] * p2) % 26;
+                    // int c2 = (key[1][0] * p1 + key[1][1] * p2) % 26;
 
-                    cipher += numberToLetter(c1);
-                    cipher += numberToLetter(c2);
+                    // cipher += numberToLetter(c1);
+                    // cipher += numberToLetter(c2);
                 }
 
                 System.out.println(cipher);
