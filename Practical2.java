@@ -86,15 +86,12 @@ public class Practical2 {
 
                 for (int i = 0; i < text.length(); i += 2) {
 
-                    // int p1 = text.charAt(i) - 'A';
                     int p1 = letterToNumber(text.charAt(i));
-
                     int p2 = letterToNumber(text.charAt(i + 1));
 
                     int c1 = (key[0][0] * p1 + key[0][1] * p2) % 26;
                     int c2 = (key[1][0] * p1 + key[1][1] * p2) % 26;
 
-                    // cipher = cipher + (char) (c1 + 'A');
                     cipher += numberToLetter(c1);
                     cipher += numberToLetter(c2);
                 }
@@ -218,6 +215,20 @@ public class Practical2 {
     public static char numberToLetter(int n) {
 
         return (char) (n + 'A');
+
+    }
+
+    public static String encryptBlock(int key[][], char first, char second) {
+
+        int p1 = letterToNumber(first);
+
+        int p2 = letterToNumber(second);
+
+        int c1 = (key[0][0] * p1 + key[0][1] * p2) % 26;
+
+        int c2 = (key[1][0] * p1 + key[1][1] * p2) % 26;
+
+        return "" + numberToLetter(c1) + numberToLetter(c2);
 
     }
 }
