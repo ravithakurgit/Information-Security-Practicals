@@ -82,16 +82,19 @@ public class Practical2 {
                 }
                 System.out.println("\nEncrypted Text");
 
-                String cipher = "";
+                String cipher = encrypt2x2(text, key);
 
-                for (int i = 0; i < text.length(); i += 2) {
+                System.out.println("Encrypted Text : " + cipher);
+                // String cipher = "";
 
-                    cipher += encryptBlock(key,
-                            text.charAt(i),
-                            text.charAt(i + 1));
-                }
+                // for (int i = 0; i < text.length(); i += 2) {
 
-                System.out.println(cipher);
+                // cipher += encryptBlock(key,
+                // text.charAt(i),
+                // text.charAt(i + 1));
+                // }
+
+                // System.out.println(cipher);
 
                 break;
 
@@ -224,6 +227,58 @@ public class Practical2 {
         int c2 = (key[1][0] * p1 + key[1][1] * p2) % 26;
 
         return "" + numberToLetter(c1) + numberToLetter(c2);
+
+    }
+
+    public static String decryptBlock(int inverseKey[][], char first, char second) {
+
+        int c1 = letterToNumber(first);
+        int c2 = letterToNumber(second);
+
+        int p1 = (inverseKey[0][0] * c1 + inverseKey[0][1] * c2) % 26;
+
+        int p2 = (inverseKey[1][0] * c1 + inverseKey[1][1] * c2) % 26;
+
+        return "" + numberToLetter(p1) + numberToLetter(p2);
+
+    }
+
+    public static String decrypt2x2(String cipher, int inverseKey[][]) {
+
+        String plain = decrypt2x2(cipher, inverseKey);
+
+        System.out.println("Decrypted Text : " + plain);
+        // String plain = "";
+
+        // for (int i = 0; i < cipher.length(); i += 2) {
+
+        // plain += decryptBlock(
+        // inverseKey,
+        // cipher.charAt(i),
+        // cipher.charAt(i + 1));
+
+        // }
+
+        return plain;
+
+    }
+
+    public static String encrypt2x2(String text, int key[][]) {
+
+        text = padding(text);
+
+        String cipher = "";
+
+        for (int i = 0; i < text.length(); i += 2) {
+
+            cipher += encryptBlock(
+                    key,
+                    text.charAt(i),
+                    text.charAt(i + 1));
+
+        }
+
+        return cipher;
 
     }
 }
