@@ -28,6 +28,11 @@ public class Practical3 {
         plain = prepareText(plain);
 
         System.out.println("\nPrepared Plain Text : " + plain);
+
+        String cipher = encrypt(plain);
+
+        System.out.println("\nCipher Text : " + cipher);
+
         System.out.println("Plain Text : " + plain);
         System.out.println("Key : " + key);
         sc.close();
@@ -110,5 +115,43 @@ public class Practical3 {
         }
 
         return result.toString();
+    }
+
+    static String encrypt(String text) {
+        StringBuilder cipher = new StringBuilder();
+
+        for (int i = 0; i < text.length(); i += 2) {
+            char first = text.charAt(i);
+            char second = text.charAt(i + 1);
+
+            int[] pos1 = position.get(first);
+            int[] pos2 = position.get(second);
+
+            int row1 = pos1[0];
+            int col1 = pos1[1];
+
+            int row2 = pos2[0];
+            int col2 = pos2[1];
+
+            // Rule 1: Same Row
+            if (row1 == row2) {
+                cipher.append(matrix[row1][(col1 + 1) % 5]);
+                cipher.append(matrix[row2][(col2 + 1) % 5]);
+            }
+
+            // Rule 2: Same Column
+            else if (col1 == col2) {
+                cipher.append(matrix[(row1 + 1) % 5][col1]);
+                cipher.append(matrix[(row2 + 1) % 5][col2]);
+            }
+
+            // Rule 3: Rectangle
+            else {
+                cipher.append(matrix[row1][col2]);
+                cipher.append(matrix[row2][col1]);
+            }
+        }
+
+        return cipher.toString();
     }
 }
