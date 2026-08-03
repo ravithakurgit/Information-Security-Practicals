@@ -12,10 +12,103 @@ public class Practical3 {
         System.out.print("Enter Keyword : ");
         String key = sc.nextLine().toUpperCase();
 
-        System.out.print("Enter Plain Text : ");
-        String plain = sc.nextLine().toUpperCase();
+        generateMatrix(key);
+        System.out.println("\nPlayfair Matrix:");
+
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 5; j++) {
+                System.out.print(matrix[i][j] + " ");
+            }
+            System.out.println();
+        }
+
+        System.out.print("\nEnter Plain Text: ");
+        String plain = sc.nextLine();
+
+        plain = prepareText(plain);
+
+        System.out.println("\nPrepared Plain Text : " + plain);
         System.out.println("Plain Text : " + plain);
         System.out.println("Key : " + key);
         sc.close();
+    }
+
+    static void generateMatrix(String key) {
+        boolean[] used = new boolean[26];
+
+        key = key.replace("J", "I");
+
+        StringBuilder sb = new StringBuilder();
+
+        for (char c : key.toCharArray()) {
+            if (c < 'A' || c > 'Z')
+                continue;
+
+            if (!used[c - 'A']) {
+                used[c - 'A'] = true;
+                sb.append(c);
+            }
+        }
+
+        for (char c = 'A'; c <= 'Z'; c++) {
+            if (c == 'J')
+                continue;
+
+            if (!used[c - 'A']) {
+                used[c - 'A'] = true;
+                sb.append(c);
+            }
+        }
+
+        int index = 0;
+
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 5; j++) {
+                matrix[i][j] = sb.charAt(index);
+
+                position.put(matrix[i][j], new int[] { i, j });
+
+                index++;
+            }
+        }
+    }
+
+    static String prepareText(String text) {
+        // Convert to uppercase
+        text = text.toUpperCase();
+
+        // Remove spaces
+        text = text.replaceAll("\\s+", "");
+
+        // Replace J with I
+        text = text.replace('J', 'I');
+
+        StringBuilder result = new StringBuilder();
+
+        int i = 0;
+
+        while (i < text.length()) {
+            char first = text.charAt(i);
+
+            if (i + 1 == text.length()) {
+                result.append(first);
+                result.append('X');
+                break;
+            }
+
+            char second = text.charAt(i + 1);
+
+            if (first == second) {
+                result.append(first);
+                result.append('X');
+                i++;
+            } else {
+                result.append(first);
+                result.append(second);
+                i += 2;
+            }
+        }
+
+        return result.toString();
     }
 }
