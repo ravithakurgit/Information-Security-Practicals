@@ -33,6 +33,10 @@ public class Practical3 {
 
         System.out.println("\nCipher Text : " + cipher);
 
+        String decrypted = decrypt(cipher);
+
+        System.out.println("\nDecrypted Text : " + decrypted);
+
         System.out.println("Plain Text : " + plain);
         System.out.println("Key : " + key);
         sc.close();
@@ -153,5 +157,43 @@ public class Practical3 {
         }
 
         return cipher.toString();
+    }
+
+    static String decrypt(String cipher) {
+        StringBuilder plain = new StringBuilder();
+
+        for (int i = 0; i < cipher.length(); i += 2) {
+            char first = cipher.charAt(i);
+            char second = cipher.charAt(i + 1);
+
+            int[] pos1 = position.get(first);
+            int[] pos2 = position.get(second);
+
+            int row1 = pos1[0];
+            int col1 = pos1[1];
+
+            int row2 = pos2[0];
+            int col2 = pos2[1];
+
+            // Rule 1: Same Row
+            if (row1 == row2) {
+                plain.append(matrix[row1][(col1 + 4) % 5]);
+                plain.append(matrix[row2][(col2 + 4) % 5]);
+            }
+
+            // Rule 2: Same Column
+            else if (col1 == col2) {
+                plain.append(matrix[(row1 + 4) % 5][col1]);
+                plain.append(matrix[(row2 + 4) % 5][col2]);
+            }
+
+            // Rule 3: Rectangle
+            else {
+                plain.append(matrix[row1][col2]);
+                plain.append(matrix[row2][col1]);
+            }
+        }
+
+        return plain.toString();
     }
 }
