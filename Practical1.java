@@ -318,4 +318,19 @@ public class Practical1 {
         return result;
 
     }
+
+    public static int determinant(int key[][]) {
+
+        int det = key[0][0] * (key[1][1] * key[2][2] - key[1][2] * key[2][1])
+                - key[0][1] * (key[1][0] * key[2][2] - key[1][2] * key[2][0])
+                + key[0][2] * (key[1][0] * key[2][1] - key[1][1] * key[2][0]);
+
+        det = det % 26;
+
+        if (det < 0)
+            det += 26;
+
+        return det;
+    }
+
 }

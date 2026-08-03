@@ -69,7 +69,16 @@ public class Practical2 {
 
                 }
                 text = padding(text);
-                System.out.println("\nPlaintext length is odd.");
+                // System.out.println("\nPlaintext length is odd.");
+                // System.out.println("After Padding : " + text);
+                if (text.length() % 2 != 0) {
+
+                    System.out.println("\nPlaintext length is odd.");
+
+                }
+
+                text = padding(text);
+
                 System.out.println("After Padding : " + text);
 
                 System.out.println("\nBlocks");
@@ -85,6 +94,9 @@ public class Practical2 {
                 String cipher = encrypt2x2(text, key);
 
                 System.out.println("Encrypted Text : " + cipher);
+                String plain = decrypt2x2(cipher, inverseKey);
+
+                System.out.println("Decrypted Text : " + plain);
                 // String cipher = "";
 
                 // for (int i = 0; i < text.length(); i += 2) {
@@ -235,9 +247,9 @@ public class Practical2 {
         int c1 = letterToNumber(first);
         int c2 = letterToNumber(second);
 
-        int p1 = (inverseKey[0][0] * c1 + inverseKey[0][1] * c2) % 26;
+        int p1 = ((inverseKey[0][0] * c1 + inverseKey[0][1] * c2) % 26 + 26) % 26;
 
-        int p2 = (inverseKey[1][0] * c1 + inverseKey[1][1] * c2) % 26;
+        int p2 = ((inverseKey[1][0] * c1 + inverseKey[1][1] * c2) % 26 + 26) % 26;
 
         return "" + numberToLetter(p1) + numberToLetter(p2);
 
@@ -245,19 +257,19 @@ public class Practical2 {
 
     public static String decrypt2x2(String cipher, int inverseKey[][]) {
 
-        String plain = decrypt2x2(cipher, inverseKey);
+        // String plain = decrypt2x2(cipher, inverseKey);
 
-        System.out.println("Decrypted Text : " + plain);
-        // String plain = "";
+        // System.out.println("Decrypted Text : " + plain);
+        String plain = "";
 
-        // for (int i = 0; i < cipher.length(); i += 2) {
+        for (int i = 0; i < cipher.length(); i += 2) {
 
-        // plain += decryptBlock(
-        // inverseKey,
-        // cipher.charAt(i),
-        // cipher.charAt(i + 1));
+            plain += decryptBlock(
+                    inverseKey,
+                    cipher.charAt(i),
+                    cipher.charAt(i + 1));
 
-        // }
+        }
 
         return plain;
 
