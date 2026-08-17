@@ -11,16 +11,26 @@ public class Practical5 {
 
             Scanner sc = new Scanner(System.in);
 
-            // Accept plaintext
+            // --------------------------------
+            // 1. Accept plaintext
+            // --------------------------------
+
             System.out.print("Enter plaintext: ");
             String plaintext = sc.nextLine();
 
-            // Accept secret key
+            // --------------------------------
+            // 2. Accept secret key
+            // --------------------------------
+
             System.out.print("Enter secret key (8 characters): ");
             String key = sc.nextLine();
 
-            // Validate key
+            // --------------------------------
+            // 3. Validate key
+            // --------------------------------
+
             if (key.length() != 8) {
+
                 System.out.println(
                         "Error: DES key must be exactly 8 characters.");
 
@@ -28,38 +38,78 @@ public class Practical5 {
                 return;
             }
 
-            // Convert String to bytes
+            // --------------------------------
+            // 4. Convert String to bytes
+            // --------------------------------
+
             byte[] plaintextBytes = plaintext.getBytes();
+
             byte[] keyBytes = key.getBytes();
 
-            // Create DES key
+            // --------------------------------
+            // 5. Create DES key
+            // --------------------------------
+
             SecretKeySpec secretKey = new SecretKeySpec(keyBytes, "DES");
 
-            // Create DES cipher
+            // --------------------------------
+            // 6. Create DES cipher
+            // --------------------------------
+
             Cipher cipher = Cipher.getInstance("DES/ECB/PKCS5Padding");
 
-            // Initialize encryption
+            // --------------------------------
+            // 7. Encryption
+            // --------------------------------
+
             cipher.init(
                     Cipher.ENCRYPT_MODE,
                     secretKey);
 
-            // Perform encryption
             byte[] ciphertext = cipher.doFinal(plaintextBytes);
 
-            // Display ciphertext
-            System.out.println("\n========== ENCRYPTION ==========");
+            System.out.println(
+                    "\n========== ENCRYPTION ==========");
 
-            System.out.println("Plaintext  : " + plaintext);
-            System.out.println("Key        : " + key);
+            System.out.println(
+                    "Plaintext  : " + plaintext);
+
+            System.out.println(
+                    "Key        : " + key);
+
             System.out.println(
                     "Ciphertext : "
                             + Arrays.toString(ciphertext));
+
+            // --------------------------------
+            // 8. Decryption
+            // --------------------------------
+
+            cipher.init(
+                    Cipher.DECRYPT_MODE,
+                    secretKey);
+
+            byte[] decryptedBytes = cipher.doFinal(ciphertext);
+
+            String decryptedText = new String(decryptedBytes);
+
+            System.out.println(
+                    "\n========== DECRYPTION ==========");
+
+            System.out.println(
+                    "Ciphertext : "
+                            + Arrays.toString(ciphertext));
+
+            System.out.println(
+                    "Decrypted  : "
+                            + decryptedText);
 
             sc.close();
 
         } catch (Exception e) {
 
-            System.out.println("Error: " + e.getMessage());
+            System.out.println(
+                    "Error: " + e.getMessage());
         }
     }
 }
