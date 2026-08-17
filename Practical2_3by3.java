@@ -7,7 +7,8 @@ public class Practical2_3by3 {
 
         System.out.println("3*3 Hill Cipher");
         System.out.println("Enter the Plain Text");
-        String text = sc.nextLine().toUpperCase();
+        String text = sc.nextLine().toUpperCase().replace(" ", "");
+
         System.out.println("Text:" + text);
         String s = padding(text);
         int key[][] = readMatrix();

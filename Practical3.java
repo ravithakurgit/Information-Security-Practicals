@@ -37,12 +37,13 @@ public class Practical3 {
 
         System.out.println("\nDecrypted Text : " + decrypted);
 
-        System.out.println("Plain Text : " + plain);
-        System.out.println("Key : " + key);
+        // System.out.println("Plain Text : " + plain);
+
         sc.close();
     }
 
     static void generateMatrix(String key) {
+
         boolean[] used = new boolean[26];
 
         key = key.replace("J", "I");
